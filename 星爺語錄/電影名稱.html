@@ -32,7 +32,7 @@
 
     #game {
       width: 1500px;
-      height: 760px;
+      height: 460px;
       /* border: 1px solid #fff; */
       display: flex;
       flex-wrap: wrap;
@@ -113,26 +113,36 @@
       justify-content: space-evenly;
     }
 
-    input {
+    .btn{
       height: 40px;
       width: 300px;
+    }
+
+    #bood {
+      width: 900px;
+      height: 300px;
+      border: 1px solid #ffa;
     }
   </style>
 </head>
 <body>
   <h1 id="title">Classic Stephen Chow Movies</h1>
   <div id="menu">
-    <a href="./星爺語錄.html"><input type="button" value="電影配對"></a>
-    <a href="./電影名稱.html"><input type="button" value="輸入電影名稱"></a>
-    <a href="./台詞大考驗.html"><input type="button" value="台詞大考驗"></a>
+    <a href="./星爺語錄.html"><input class="btn" type="button" value="電影配對"></a>
+    <a href="./電影名稱.html"><input class="btn" type="button" value="輸入電影名稱"></a>
+    <a href="./台詞大考驗.html"><input class="btn" type="button" value="台詞大考驗"></a>
   </div>
   <div id="game"></div>
-
+  <div id="bood">
+    <input id="movieName" type="text" value="">
+    <input id="confirmButton" type="button" value="確認">
+  </div>
   <script src="./jquery-3.6.0.min.js"></script>
   <script src="http://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
+    
     // 產生 16 張卡片
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 8; i++) {
       $('#game').append(`
         <div class="card">
           <div class="card-front"></div>
@@ -146,22 +156,23 @@
       const num = i 
       $('.card').eq(i).find('.card-front').css('background-image', `url(./images/${num+1}H.gif)`)
       $('.card').eq(i).attr('data-card', num+1)
+      $('.card').eq(i).attr('id', num+1)
 
       // 打散
       const target = Math.round(Math.random() * 15)
       $('.card').eq(target).insertAfter($('.card').eq(i))
     }
 
-    for (let i = 8; i < 16; i++) {
-      // 決定數字
-      const num = i 
-      $('.card').eq(i).find('.card-front').css('background-image', `url(./images/${num-7}C.gif)`)
-      $('.card').eq(i).attr('data-card', num-7)
+    // for (let i = 8; i < 16; i++) {
+    //   // 決定數字
+    //   const num = i 
+    //   $('.card').eq(i).find('.card-front').css('background-image', `url(./images/${num-7}C.gif)`)
+    //   $('.card').eq(i).attr('data-card', num-7)
 
-      // 打散
-      const target = Math.round(Math.random() * 15)
-      $('.card').eq(target).insertAfter($('.card').eq(i))
-    }
+    //   // 打散
+    //   const target = Math.round(Math.random() * 15)
+    //   $('.card').eq(target).insertAfter($('.card').eq(i))
+    // }
 
     // 翻牌
     $('#game').on('click', '.card', function() {
@@ -169,6 +180,25 @@
       if ( $('.card-open').length < 2 && !$(this).hasClass('card-open')) {
         $(this).addClass('card-open')
       }
+
+      // 輸入電影名稱
+      const movieName = document.getElementById('movieName')
+      const confirmButton = document.getElementById('confirmButton')
+      confirmButton.onclick = () => {
+      if (movieName.value === '唐伯虎點秋香') {
+        if ($('.card-open').attr('data-card') === "4") {
+        
+        // console.log('666')
+        $('.card-open').addClass('card-ok')
+        $('.card-open .card-front').fadeTo(3000, 0)
+      } 
+    }
+  }
+    // confirmButton.onclick = () => {
+    // if ($('.card-open').attr('data-card') === "1") {
+    // console.log('666')
+    // }
+    // }
 
       // 如果翻開兩張了
       if ( $('.card-open').length === 2 ) {
