@@ -134,12 +134,15 @@
   </div>
   <div id="game"></div>
   <div id="bood">
-    <input id="movieName" type="text" value="">
+    <input id="movieName" type="text" value="0" placeholder="請輸入答案">
     <input id="confirmButton" type="button" value="確認">
   </div>
   <script src="./jquery-3.6.0.min.js"></script>
   <script src="http://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
+
+      const movieName = document.getElementById('movieName')
+      const confirmButton = document.getElementById('confirmButton')
     
     // 產生 16 張卡片
     for (let i = 0; i < 8; i++) {
@@ -173,62 +176,63 @@
     //   const target = Math.round(Math.random() * 15)
     //   $('.card').eq(target).insertAfter($('.card').eq(i))
     // }
-
+    // console.log("666")
     // 翻牌
+    confirmButton.onclick = () => {
+        if (movieName.value === '唐伯虎點秋香') {
+          if ($('.card-open').attr('data-card') === "4") {
+            $('.card-open').addClass('card-ok')
+            $('.card-open .card-front').fadeTo(3000, 0)
+            // $('.card-back').fadeTo(5000, 0)
+            setTimeout(() => {
+              $('.card-open').removeClass('card-open')
+              // $('.card-front').removeClass('card-front')
+            },3000)
+            movieName.value = ""
+          } 
+        } else {
+          $('.card-open').removeClass('card-open')
+          // $('.card-front').removeClass('card-front')
+
+        }
+      }
+
+
     $('#game').on('click', '.card', function() {
       // 最多只能翻兩張牌，且這張牌還沒翻開
-      if ( $('.card-open').length < 2 && !$(this).hasClass('card-open')) {
+      if ( $('.card-open').length < 1 && !$(this).hasClass('card-open')) {
         $(this).addClass('card-open')
       }
 
-      // 輸入電影名稱
-      const movieName = document.getElementById('movieName')
-      const confirmButton = document.getElementById('confirmButton')
-      confirmButton.onclick = () => {
-      if (movieName.value === '唐伯虎點秋香') {
-        if ($('.card-open').attr('data-card') === "4") {
-        
-        // console.log('666')
-        $('.card-open').addClass('card-ok')
-        $('.card-open .card-front').fadeTo(3000, 0)
-      } 
-    }
-  }
-    // confirmButton.onclick = () => {
-    // if ($('.card-open').attr('data-card') === "1") {
-    // console.log('666')
-    // }
-    // }
-
       // 如果翻開兩張了
-      if ( $('.card-open').length === 2 ) {
+      // if ( $('.card-open').length === 2 ) {
         // 如果兩張數字一樣
-        if ($('.card-open').eq(0).attr('data-card') === $('.card-open').eq(1).attr('data-card')) {
-          // 使用 card-ok 標記已完成並淡出
-          $('.card-open').addClass('card-ok')
-          // 將 card-front 淡出而不是 .card，因為對 card 淡出會把 3d 壓平
-          $('.card-open .card-front').fadeTo(3000, 0)
-        }
+        // if ($('.card-open').eq(0).attr('data-card') === $('.card-open').eq(1).attr('data-card')) {
+        //   // 使用 card-ok 標記已完成並淡出
+        //   $('.card-open').addClass('card-ok')
+        //   // 將 card-front 淡出而不是 .card，因為對 card 淡出會把 3d 壓平
+        //   $('.card-open .card-front').fadeTo(3000, 0)
+        // }
 
         // 不管一不一樣都翻回來
         setTimeout(() => {
-          // 如果 .card-open 裡的 card-front 透明度不是 1，把 .card-open 透明度設為 0
-          // .each() 類似 for of，裡面的 $(this) 代表迴圈正在跑的元素
+        //   // 如果 .card-open 裡的 card-front 透明度不是 1，把 .card-open 透明度設為 0
+        //   // .each() 類似 for of，裡面的 $(this) 代表迴圈正在跑的元素
           $('.card-open').each(function() {
             if ($(this).find('.card-front').css('opacity') != 1) {
               $(this).css('opacity', 0)
             }
           })
 
-          $('.card-open').removeClass('card-open')
-          if ($('.card-ok').length === 16) {
+          // $('.card-open').removeClass('card-open')
+          if ($('.card-ok').length === 8) {
             Swal.fire({
               title: '恭喜過關'
             })
             $('body').css('background-image','url("./images/結束福利.jpg")')
           }
         }, 2000)
-      }
+      // }
     })
   </script>
 </body>
