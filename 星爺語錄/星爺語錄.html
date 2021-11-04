@@ -25,14 +25,14 @@
       background-position: center;
       background-size:cover;
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
       align-items: center;
       flex-direction: column;
     }
 
     #game {
-      width: 1500px;
-      height: 760px;
+      width: 1600px;
+      height: 800px;
       /* border: 1px solid #fff; */
       display: flex;
       flex-wrap: wrap;
@@ -41,13 +41,13 @@
     }
 
     .card {
-      width: 320px;
-      height: 180px;
+      width: 310px;
+      height: 190px;
       position: relative;
       /* 設定子元素在 3D 空間內 */
       transform-style: preserve-3d;
       float: left;
-      margin: 5px 15px;
+      margin: 1px 20px;
       transition: .5s;
       border: 1px solid #000;
       box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
@@ -86,16 +86,16 @@
     }
 
     #title {
-      width:1560px;
-      height: 140px;
+      width:1360px;
+      height: 80px;
       border-width: 5px 15px 15px 4px;
       border-style: solid;
       border-color: #666 #999 #888 #777;
       color: white;
-      font-size: 5rem;
+      font-size: 3rem;
       font-style: italic;
       text-align: center;
-      line-height: 108px;
+      line-height: 50px;
       letter-spacing: 3px;
       padding-right: 15px;
       background-color: rgba(0, 0, 0, 0.5);
@@ -106,25 +106,51 @@
     }
 
     #menu {
-      border: #ffa solid 1px;
+      /* border: #ffa solid 1px; */
       width: 1200px;
       height: 40px;
       display: flex;
       justify-content: space-evenly;
+      /* margin-bottom: 55px; */
     }
 
-    input {
+    /* input {
       height: 40px;
       width: 300px;
+    } */
+
+    .btn{
+      height: 40px;
+      width: 300px;
+      border-radius: 10px;
+      letter-spacing: 8px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      background-color:#ffffff;
+      box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+      transition: .5s;
+      border: 2px solid #333;
+    }
+
+    .btn:hover {
+      margin-left: -3px;
+      margin-top: -3px;
+      background-color:slategrey;
+      color: white;
+      border: 3px solid #ccc;
+      font-size: 1.4rem;
+      letter-spacing: 15px;
+      padding-left: 15px;
+      box-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
     }
   </style>
 </head>
 <body>
   <h1 id="title">Classic Stephen Chow Movies</h1>
   <div id="menu">
-    <a href="./星爺語錄.html"><input type="button" value="電影配對"></a>
-    <a href="./電影名稱.html"><input type="button" value="輸入電影名稱"></a>
-    <a href="./台詞大考驗.html"><input type="button" value="台詞大考驗"></a>
+    <a href="./星爺語錄.html"><input type="button" class="btn" value="電影配對"></a>
+    <a href="./電影名稱.html"><input type="button" class="btn" value="輸入電影名稱"></a>
+    <a href="./台詞大考驗.html"><input type="button" class="btn" value="台詞大考驗"></a>
   </div>
   <div id="game"></div>
 
